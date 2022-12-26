@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { ChartTypes } from "../Chart/Chart.types";
 import { Config } from "../Dashboard/Dashboard.types";
-import { FilterProps } from "../Filters/Filters.types";
+import { FilterProps } from "../Filter/Filter.types";
 import { PickerOptions } from "../Picker/Picker.types";
 
 export interface DataProviderProps<T> {
@@ -18,6 +18,8 @@ export interface DataContextProps {
   filterBy?: (filter: FilterDataBy) => void;
   getFilterData?: (filter: FilterProps) => PickerOptions[] | undefined;
   filter?: FilterDataBy | null;
+  objectKeys?: string[]
+  getChartOptions?: () => void;
 }
 
 export type ChartType = {

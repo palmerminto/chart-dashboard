@@ -1,7 +1,7 @@
-import _, { filter } from "lodash";
+import _ from "lodash";
 import { useState } from "react";
 import { Config } from "../Dashboard/Dashboard.types";
-import { FilterProps } from "../Filters/Filters.types";
+import { FilterProps } from "../Filter/Filter.types";
 import { PickerOptions } from "../Picker/Picker.types";
 import {
   DataProviderProps,
@@ -33,8 +33,6 @@ export function DataProvider<T>(props: DataProviderProps<T[]>) {
         [config.keyData]: _.sumBy(objs, config.keyData),
       }))
       .value();
-
-    console.log(groupedData)
 
     const orderedByHighestData = _.orderBy(
       groupedData,
@@ -69,10 +67,26 @@ export function DataProvider<T>(props: DataProviderProps<T[]>) {
 
     uniqueElements?.sort().map((element) => {
       selectElements?.push({ label: element, value: element });
+      return null;
     });
 
     return selectElements;
   };
+
+  const getChartOptions = () => {
+    let chartOptions: PickerOptions[] = [];
+    if (props?.data && props?.data[0]) {
+      Object.keys(props?.data[0]).sort().map(key => {
+        chartOptions.push({
+          value: key,
+          label: key
+        })
+        return null;
+      })
+    }
+
+    return chartOptions
+  }
 
   return (
     <DataContext.Provider
@@ -80,7 +94,8 @@ export function DataProvider<T>(props: DataProviderProps<T[]>) {
         getChartData,
         filterBy,
         getFilterData,
-        filter
+        filter,
+        getChartOptions
       }}
     >
       {props?.children}
