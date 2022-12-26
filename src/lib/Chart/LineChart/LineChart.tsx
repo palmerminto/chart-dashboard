@@ -1,33 +1,16 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, registerables } from "chart.js";
-import { Config } from "../../Dashboard/Dashboard.types";
+import { Chart as ChartJS, ChartData, Point, registerables } from "chart.js";
 ChartJS.register(...registerables);
 
-export const LineChart: FunctionComponent<{
-  config: Config;
-}> = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-  const [data] = useState({
-    labels: labels,
-    datasets: [
-      {
-        label: "Expenses by Month",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        backgroundColor: ["rgb(153, 102, 255)"],
-        borderColor: ["rgb(153, 102, 255)"],
-        borderWidth: 1,
-      },
-    ],
-  });
+export type LineChartType = ChartData<
+  "line",
+  (number | Point | null)[],
+  unknown
+>;
 
-  return <Line data={data} />;
+export const LineChart: FunctionComponent<{ data: LineChartType }> = (
+  props
+) => {
+  return <Line data={props?.data} />;
 };

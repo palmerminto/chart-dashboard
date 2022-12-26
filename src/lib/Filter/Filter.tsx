@@ -2,7 +2,7 @@ import { Fragment, FunctionComponent } from "react";
 import { useData } from "../DataProvider/useData";
 import { Picker } from "../Picker/Picker";
 import { PickerOptions } from "../Picker/Picker.types";
-import { FilterProps } from "./Filters.types";
+import { FilterProps } from "./Filter.types";
 
 export const Filter: FunctionComponent<FilterProps> = (props) => {
   const { filterBy, getFilterData } = useData();

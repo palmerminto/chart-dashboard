@@ -1,5 +1,5 @@
-import { Fragment, FunctionComponent } from "react";
-import { Chart, Dashboard } from "./lib";
+import { Fragment, FunctionComponent, useState } from "react";
+import { Chart, Dashboard, Filter } from "./lib";
 import { Config } from "./lib/Dashboard/Dashboard.types";
 
 export interface Sales {
@@ -37,16 +37,24 @@ const config: Config[] = [
     groupedBy: "sku",
     keyData: "total",
     type: "bar",
-    xAxisLabel: "Product SKU's",
-    title: "Top 10 Products",
+    groupedByLabel: "Product SKU's",
+    title: "Example: Top 10 Products",
+    id: "string",
   },
 ];
 
 export const ExampleDashboard: FunctionComponent = () => {
+  const [screen, setScreen] = useState(1);
   return (
     <Fragment>
-      <ScreenOne />
-      {/* <ScreenTwo /> */}
+      <nav>
+        <button onClick={() => setScreen(1)}>Tab 1</button>
+        <button onClick={() => setScreen(2)}>Tab 2</button>
+      </nav>
+      <article>
+        {screen === 1 && <ScreenOne />}
+        {screen === 2 && <ScreenTwo />}
+      </article>
     </Fragment>
   );
 };
@@ -63,12 +71,21 @@ const ScreenOne: FunctionComponent = () => {
 
 const ScreenTwo: FunctionComponent = () => {
   return (
-    <Dashboard<Sales>
-      data={data as unknown as Sales[]}
-      filters={[{ filterKey: "category", label: "Category", type: "select" }]}
-    >
+    <Dashboard<Sales> data={data as unknown as Sales[]}>
       <div>
+        <div>
+          <Filter filterKey="category" label="Category" type="select" />
+        </div>
+        <div>
+          <div>
+            <strong>Santa Widget</strong>
+          </div>
+          <p>
+            <img src="./walking_santa.gif" height={200} />
+          </p>
+        </div>
         <div className="view">
+          <strong>Chart Widget</strong>
           <Chart config={config[0]} />
         </div>
       </div>

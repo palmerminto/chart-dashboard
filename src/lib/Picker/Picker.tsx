@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import Select, { SingleValue } from "react-select";
+import Select from "react-select";
 import { PickerOptions } from "./Picker.types";
 
 export const Picker: FunctionComponent<{
