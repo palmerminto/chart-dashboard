@@ -1,5 +1,28 @@
 import { ReactNode } from "react";
+import { ChartTypes } from "../Chart/Chart.types";
+import { Config } from "../Dashboard/Dashboard.types";
+import { FilterProps } from "../Filters/Filters.types";
+import { PickerOptions } from "../Picker/Picker.types";
 
-export interface DataProviderProps {
-  children?: ReactNode
+export interface DataProviderProps<T> {
+  children?: ReactNode;
+  data?: T[];
 }
+
+export type FilterDataBy = { key: string; value: string };
+
+export type FormattedData = { data: number[]; labels: string[] };
+
+export interface DataContextProps {
+  getChartData?: (config: Config) => FormattedData;
+  filterBy?: (filter: FilterDataBy) => void;
+  getFilterData?: (filter: FilterProps) => PickerOptions[] | undefined;
+  filter?: FilterDataBy | null;
+}
+
+export type ChartType = {
+  label?: string;
+  labels?: string[];
+  data?: number[];
+  type: ChartTypes;
+};

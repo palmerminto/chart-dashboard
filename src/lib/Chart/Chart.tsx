@@ -7,9 +7,9 @@ import { PieChart } from "./PieChart/PieChart";
 export const Chart: FunctionComponent<ChartProps> = (props) => {
   return (
     <Fragment>
-      {props.type === "bar" && <BarChart />}
-      {props.type === "line" && <LineChart />}
-      {props.type === "pie" && <PieChart />}
+      {props.config.type === "bar" && <BarChart config={props.config} />}
+      {props.config.type === "line" && <LineChart config={props.config} />}
+      {props.config.type === "pie" && <PieChart config={props.config} />}
     </Fragment>
   );
 };
