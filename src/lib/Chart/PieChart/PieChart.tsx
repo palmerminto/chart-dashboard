@@ -2,10 +2,13 @@ import { FunctionComponent, useState } from "react";
 
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from 'chart.js';
+import { Config } from "../../Dashboard/Dashboard.types";
 
 ChartJS.register(...registerables);
 
-export const PieChart: FunctionComponent = () => {
+export const PieChart: FunctionComponent<{
+  config: Config;
+}> = () => {
   const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   const [data] = useState({
     labels: labels,

@@ -1,0 +1,1 @@
+export type PickerOptions = { label: string; value: string }
